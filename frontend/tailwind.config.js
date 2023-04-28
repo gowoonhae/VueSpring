@@ -8,7 +8,11 @@ export const content = [
     "./app.vue",
 ];
 export const theme = {
-    extend: {},
+    extend: {
+        container: {
+            center: true,
+        },
+    },
 };
 export const plugins = [];
 

@@ -1,5 +1,7 @@
 package com.cloudmall.backend;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +18,12 @@ class BackendApplicationTests {
 	@Test
 	void testJpa() {
 		BoardEntity test = BoardEntity.builder()
-		.title("AMD Radeon RX480")
-		.writer("고운산")
-		.content("GTX1060과 비슷한 성능입니다.")
-		.image_src("/image/rx480.webp")
+		.id(1)
+		.title("AMD Radeon 290X")
+		.content("본문 수정 완료.")
+		.image_src("/image/290x.webp")
+		.price(20000)
+		.updated_date(LocalDate.now())
 		.build();
 
 		boardRepository.save(test);

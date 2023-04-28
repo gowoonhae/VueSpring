@@ -24,4 +24,11 @@ public class BoardService {
         return response;
     }
 
+    public BoardResponse itemDetail(Long id){
+        BoardEntity entity = boardRepository.findById(id).get();
+        BoardResponse response = new BoardResponse(entity);
+        
+        return response;
+    }
+
 }
