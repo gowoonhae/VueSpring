@@ -2,10 +2,15 @@ package com.cloudmall.backend.board;
 
 import java.time.LocalDate;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class BoardResponse {
+@NoArgsConstructor
+@AllArgsConstructor
+public class BoardDTO {
+
     private Integer id;
     private String title;
     private String content;
@@ -15,7 +20,7 @@ public class BoardResponse {
     private LocalDate updated_date;
 
     // Entity 를 DTO 로
-    public BoardResponse(BoardEntity entity){
+    public BoardDTO(BoardEntity entity){
         id = entity.getId();
         title = entity.getTitle();
         content = entity.getContent();

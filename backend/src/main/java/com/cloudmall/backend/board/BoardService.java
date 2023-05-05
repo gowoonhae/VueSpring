@@ -1,5 +1,6 @@
 package com.cloudmall.backend.board;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,22 +14,55 @@ public class BoardService {
     
     private final BoardRepository boardRepository;
 
-    public List<BoardResponse> itemList(){
+    public List<BoardDTO> itemList(){
         List<BoardEntity> entity = boardRepository.findAll();
-        List<BoardResponse> response = new ArrayList<>();
+        List<BoardDTO> dto = new ArrayList<>();
 
         for(BoardEntity i: entity){
-            response.add(new BoardResponse(i));
+            dto.add(new BoardDTO(i));
         }
 
-        return response;
+        return dto;
     }
 
-    public BoardResponse itemDetail(Long id){
+    public BoardDTO itemDetail(Integer id){
+        if(id==0){
+            return new BoardDTO();
+        }else{
+            BoardEntity entity = boardRepository.findById(id).get();
+            BoardDTO dto = new BoardDTO(entity);
+            
+            return dto;
+        }
+    }
+
+    public String itemCreate(BoardDTO dto){
+        if(dto.getId() == null){
+            BoardEntity entity = BoardEntity.builder()
+            .title(dto.getTitle())
+            .content(dto.getContent())
+            .image_src(dto.getImage_src())
+            .price(dto.getPrice())
+            .created_date(LocalDate.now())
+            .build();
+            boardRepository.save(entity);
+            return entity.getId().toString();
+        } else{
+            BoardEntity entity = BoardEntity.builder()
+            .id(dto.getId())
+            .title(dto.getTitle())
+            .content(dto.getContent())
+            .image_src(dto.getImage_src())
+            .price(dto.getPrice())
+            .updated_date(LocalDate.now())
+            .build();
+            boardRepository.save(entity);
+            return entity.getId().toString();
+        }
+    }
+
+    public void itemDelete(Integer id){
         BoardEntity entity = boardRepository.findById(id).get();
-        BoardResponse response = new BoardResponse(entity);
-        
-        return response;
+        boardRepository.delete(entity);
     }
-
 }
