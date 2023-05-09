@@ -54,6 +54,7 @@ public class BoardService {
             .content(dto.getContent())
             .image_src(dto.getImage_src())
             .price(dto.getPrice())
+            .created_date(dto.getCreated_date())
             .updated_date(LocalDate.now())
             .build();
             boardRepository.save(entity);
