@@ -62,8 +62,9 @@ public class BoardService {
         }
     }
 
-    public void itemDelete(Integer id){
+    public String itemDelete(Integer id){
         BoardEntity entity = boardRepository.findById(id).get();
         boardRepository.delete(entity);
+        return entity.getImage_src();
     }
 }

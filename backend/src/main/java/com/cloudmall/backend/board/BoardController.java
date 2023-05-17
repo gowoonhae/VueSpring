@@ -38,7 +38,7 @@ public class BoardController {
     }
 
     @PostMapping("/item/delete")
-    public void itemDelete(@RequestBody Integer id){
-        boardService.itemDelete(id);
+    public String itemDelete(@RequestBody Integer id){
+        return boardService.itemDelete(id);
     }
 }
